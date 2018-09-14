@@ -9,6 +9,9 @@ window10 +docker +consul 单机版作为配置中心
       docker pull consul
 ### 2.2 启动 consul
       docker run -d  -e CONSUL_UI_BETA=true --restart always -p 8500:8500 -p 8300:8300 -p 8600:8600 consul agent -server -bootstrap-expect=1  -bind=127.0.0.1 -client=0.0.0.0 -ui
+       
+       注意需要挂载本地目录，否则宿主机重启后，内容消失
+       docker run -d -v /c/home/consul:/consul/data -e CONSUL_UI_BETA=true --restart always -p 8500:8500 -p 8300:8300 -p 8600:8600 consul agent -server -bootstrap-expect=1  -bind=127.0.0.1 -client=0.0.0.0 -ui
 ### 2.3 验证启动是否成功
     
 ### 2.3.1  访问： 192.168.99.100:8500 
